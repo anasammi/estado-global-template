@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { handleHome } from "../Router/cordinator";
 import styled from "styled-components";
 
-export default function Cadastro (props){
+export default function Cadastro ({setFrutas, frutas}){
   const[formulario, setFormulario]=useState({name:"", url:"", price:""})
   const navigate = useNavigate();
+  console.log(frutas)
 
   const onChangeInputs=(event)=>{
     const {name, value}= event.target
@@ -14,8 +15,11 @@ export default function Cadastro (props){
   const handleClick = (event)=>{
     event.preventDefault()
     console.log(formulario);
+    const novaFruta = {id: Math.random(), name: formulario.name, url: formulario.url, price: formulario.price}
+    setFrutas([...frutas, novaFruta])
+    setFormulario({name:"", url:"", price:""})
   }
- 
+
  
   return(
     <CadastroContainer>
